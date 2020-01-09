@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA74C7F4-E9C8-45DF-A85D-321E36799887}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LazerEngine</RootNamespace>
+    <AssemblyName>LazerEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework.Net, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Model\CollisionSensor.cs" />
+    <Compile Include="Core\Model\Direction.cs" />
+    <Compile Include="Core\Model\EngineGameObject.cs" />
+    <Compile Include="Core\Model\Screen.cs" />
+    <Compile Include="Core\Provider\CollisionProvider.cs" />
+    <Compile Include="Core\Provider\GameObjectProvider.cs" />
+    <Compile Include="Core\Provider\ScreenProvider.cs" />
+    <Compile Include="LazerGameCore.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Content\Content.mgcb" />
+    <None Include="Content\Fonts\Font.spritefont" />
+    <None Include="Content\Fonts\font.ttf" />
+    <None Include="Content\Fonts\Tooltip.spritefont" />
+    <None Include="Content\obj\DesktopGL\.mgcontent" />
+    <None Include="Content\obj\DesktopGL\.mgstats" />
+    <None Include="Content\obj\DesktopGL\Content\.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\.mgstats" />
+    <None Include="Content\obj\DesktopGL\Content\Fonts\Font.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Fonts\Tooltip.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\bigcastle.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\brick.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\bush.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\castle.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\cloud.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\CoinSheet.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\Enemies\fireball.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\Enemies\goomba.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\fireflower.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\flagpole.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\ftop.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\Icons\coin.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\Icons\goomba.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\Icons\mario.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\logo.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\mushroom.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\question.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\rflag.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\rock.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\spritesheet.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\unbreakable.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\warp1.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Content\Textures\warp2.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Fonts\File.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Fonts\Font.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Fonts\Tooltip.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\bigcastle.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\brick.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\bush.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\castle.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\cloud.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\CoinSheet.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\Enemies\fireball.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\Enemies\goomba.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\fireflower.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\flagpole.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\ftop.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\Icons\coin.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\Icons\goomba.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\Icons\mario.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\logo.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\mushroom.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\question.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\rflag.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\rock.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\spritesheet.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\unbreakable.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\warp1.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Textures\warp2.mgcontent" />
+    <None Include="x64\libopenal.so.1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x64\libSDL2-2.0.so.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x86\libopenal.so.1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x86\libSDL2-2.0.so.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\control.xml" />
+    <Content Include="x64\SDL2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\soft_oal.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SDL2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\soft_oal.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LazerEngine.Common\LazerEngine.Common.csproj">
+      <Project>{444090b6-d77a-4de4-a056-72572415d503}</Project>
+      <Name>LazerEngine.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LazerEngine.Content\LazerEngine.Content.csproj">
+      <Project>{f5e1af63-10ec-44a0-b81a-2d48d2b20bbf}</Project>
+      <Name>LazerEngine.Content</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
