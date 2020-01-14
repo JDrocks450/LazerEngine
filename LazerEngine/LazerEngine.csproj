@@ -95,13 +95,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Model\CollisionSensor.cs" />
-    <Compile Include="Core\Model\Direction.cs" />
     <Compile Include="Core\Model\EngineGameObject.cs" />
+    <Compile Include="Core\Model\Person.cs" />
+    <Compile Include="Core\Model\Physics\CollisionField.cs" />
+    <Compile Include="Core\Model\Physics\CollisionSensor.cs" />
+    <Compile Include="Core\Model\Player.cs" />
     <Compile Include="Core\Model\Screen.cs" />
+    <Compile Include="Core\Model\Terrain\TerrainTile.cs" />
     <Compile Include="Core\Provider\CollisionProvider.cs" />
     <Compile Include="Core\Provider\GameObjectProvider.cs" />
     <Compile Include="Core\Provider\ScreenProvider.cs" />
+    <Compile Include="Core\Provider\TerrainProvider.cs" />
     <Compile Include="LazerGameCore.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

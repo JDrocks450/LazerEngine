@@ -1,33 +1,35 @@
 ﻿using LazerEngine.Common.Provider;
 using LazerEngine.Common.Util;
 using LazerEngine.Content;
-using LazerEngine.Content.Provider;
 using LazerEngine.Core.Model;
 using LazerEngine.Core.Provider;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LazerEngine
 {
+    public enum DrawCallType
+    {
+        Text, Texture
+    }
     public class LazerGameCore : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        ProviderManager ProviderManager;
-        LazerContentManager ContentManager;
-        ScreenProvider ScreenProvider;
+        protected GraphicsDeviceManager graphics;
+        protected SpriteBatch spriteBatch;
+        protected ProviderManager ProviderManager;
+        protected LazerContentManager ContentManager;
+        protected ScreenProvider ScreenProvider;
+        protected GameObjectProvider ObjectProvider;
+        protected CollisionProvider CollisionProvider;
+        private static List<(DrawCallType type, Point location, object parameter)> _debugDrawCalls = new List<(DrawCallType, Point, object)>();
 
-        public LazerGameCore()
+        public LazerGameCore(string ContentRoot = "Content", int GWidth = 1024, int GHeight = 768)
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 768;
+            Content.RootDirectory = ContentRoot;
+            graphics.PreferredBackBufferWidth = GWidth;
+            graphics.PreferredBackBufferHeight = GHeight;
             //graphics.SynchronizeWithVerticalRetrace = false;
         }
        
@@ -36,21 +38,14 @@ namespace LazerEngine
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameResources.Init(GraphicsDevice);
             ProviderManager = new ProviderManager("client");
-            ContentManager = (LazerContentManager)ProviderManager.Register(new LazerEngine.Content.LazerContentManager(Content));
-            ScreenProvider = (ScreenProvider)ProviderManager.Register(new ScreenProvider());
-            ScreenProvider.Add(new Screen("gameplay")
-            {
-                BackgroundColor = Color.DeepSkyBlue
-            });
+            ContentManager = ProviderManager.Register(new LazerEngine.Content.LazerContentManager(Content));
+            CollisionProvider = ProviderManager.Register(new CollisionProvider());
+            ScreenProvider = ProviderManager.Register(new ScreenProvider());                
+            //ScreenProvider.Add(new Screen("gameplay")
+            //{
+             //   BackgroundColor = Color.DeepSkyBlue
+            //});
             base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-            var terrain = ContentManager.Get<TerrainProvider>();
-            terrain.SetTile(new Point(1, 1), "map1");
-            ScreenProvider.Get("gameplay").Load();
         }
 
         protected override void UnloadContent()
@@ -66,12 +61,37 @@ namespace LazerEngine
         }
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.Blue);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, null, null, null);
             foreach (var screen in ScreenProvider.GetAll())
-                screen.Draw(spriteBatch);
+            {
+                screen.preDraw();
+                screen.Draw(spriteBatch);                
+            }
+            foreach(var call in _debugDrawCalls.ToArray())
+                switch (call.type)
+                {
+                    case DrawCallType.Text:
+                        spriteBatch.DrawString(ContentManager.GetContent<SpriteFont>("Fonts/Font"), (string)call.parameter, call.location.ToVector2(), Color.White);
+                        break;
+                    case DrawCallType.Texture:
+                        spriteBatch.Draw((Texture2D)call.parameter, 
+                            new Rectangle(call.location, 
+                            new Point(((Texture2D)call.parameter).Width, ((Texture2D)call.parameter).Height)), 
+                            Color.White);
+                        break;
+                }
             spriteBatch.End();
+            foreach (var screen in ScreenProvider.GetAll())
+                screen.postDraw();
+            _debugDrawCalls.Clear();
             base.Draw(gameTime);   
+        }
+        public static void DrawDebugText(string message, Point location = default)
+        {
+            if (location == default)
+                location = new Point(10, 10);
+            _debugDrawCalls.Add((DrawCallType.Text, location, message));
         }
     }
 }

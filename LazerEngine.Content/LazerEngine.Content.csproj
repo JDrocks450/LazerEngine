@@ -46,15 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LazerContentManager.cs" />
-    <Compile Include="Model\TerrainTile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provider\TerrainProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LazerEngine.Common\LazerEngine.Common.csproj">
       <Project>{444090b6-d77a-4de4-a056-72572415d503}</Project>
       <Name>LazerEngine.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Provider\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Primitives\CollisionType.cs" />
+    <Compile Include="Primitives\Direction.cs" />
     <Compile Include="Model\IGameComponent.cs" />
     <Compile Include="Model\LazerGameComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,6 +51,7 @@
     <Compile Include="Util\GameResources.cs" />
     <Compile Include="Provider\IProvider.cs" />
     <Compile Include="Provider\ProviderManager.cs" />
+    <Compile Include="Util\IDGenerator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

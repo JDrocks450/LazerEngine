@@ -17,9 +17,10 @@ namespace LazerEngine.Core.Provider
 
         }
 
-        public void Add(Screen screen)
+        public Screen Add(Screen screen)
         {
             _screens.Add(screen.Name, screen);
+            return _screens[screen.Name];
         }
 
         public Screen Get(string key)

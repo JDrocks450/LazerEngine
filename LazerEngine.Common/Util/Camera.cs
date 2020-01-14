@@ -105,14 +105,14 @@ namespace LazerEngine.Common.Util
                     else
                         Pos.X = center.X;
                     Pos.Y = center.Y;
-                }
-                Screen = new Rectangle((int)Pos.X - screen.Width, (int)Pos.Y - screen.Height, screen.Width, screen.Height);
-            }           
+                }                
+            }    
+            Screen = new Rectangle((int)Pos.X - screen.Width, (int)Pos.Y - screen.Height, screen.Width, screen.Height);
             _transform =       // Thanks to o KB o for this solution
               Matrix.CreateTranslation(new Vector3(-Pos.X, -Pos.Y, 0)) *
                                          Matrix.CreateRotationZ(0) *
                                          Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
-                                         Matrix.CreateTranslation(new Vector3(screen.Width, screen.Height, 0));
+                                         Matrix.CreateTranslation(new Vector3(0, 0, 0));
             return _transform;
         }
 

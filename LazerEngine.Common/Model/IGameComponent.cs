@@ -9,15 +9,7 @@ using System.Threading.Tasks;
 namespace LazerEngine.Common.Model
 {
     public interface IGameComponent : IDisposable
-    {
-        Vector2 Location
-        {
-            get; set;
-        }
-        Vector2 Size
-        {
-            get; set;
-        }
+    {        
         /// <summary>
         /// Load will be ignored if this is true
         /// </summary>

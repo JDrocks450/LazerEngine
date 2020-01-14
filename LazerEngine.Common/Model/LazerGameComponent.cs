@@ -24,10 +24,21 @@ namespace LazerEngine.Common.Model
         {
             get;set;
         }
+        public Vector2 Location;
+
+        public Vector2 Size
+        {
+            get; set;
+        }
 
         public Rectangle Hitbox
         {
-            get => new Rectangle(Location.ToPoint(), (Size.ToPoint()));
+            get => new Rectangle(Location.ToPoint(), (Size * new Vector2(Scale)).ToPoint());
+            set
+            {
+                Location = value.Location.ToVector2();
+                Size = value.Size.ToVector2();
+            }
         }
 
         private Rectangle _textureDestination;
@@ -35,28 +46,37 @@ namespace LazerEngine.Common.Model
         {
             get
             {
-                if (_textureDestination == null)
-                    return Hitbox;
+                if (_textureDestination == default)
+                    return new Rectangle(Hitbox.Location, Hitbox.Size);
                 return _textureDestination;
             }
             set => _textureDestination = value;
         }
 
-        public Rectangle TextureSource
+        public SpriteEffects SpriteFlipSetting { get; set; } = SpriteEffects.None;
+        public Rectangle? TextureSource
         {
-            get;set;
-        }
+            get; set;
+        } = null;
 
-        public Color Mask
+        public Color Color
         {
-            get; internal set;
+            get; set;
         } = Color.Silver;
 
-        public Color Ambience
+        public virtual Color Ambience
         {
             get; set;
         } = Color.Transparent;
 
+        public virtual float AmbientIntensity
+        {
+            get; set;
+        } = 0f;
+
+        /// <summary>
+        /// The origin of the sprite. Zero to One, 1 = Sprite Width/Height, 0 = 0
+        /// </summary>
         public Vector2 Origin
         {
             get; set;
@@ -71,12 +91,13 @@ namespace LazerEngine.Common.Model
         {
             get; set;
         }
-        public Vector2 Location { get; set; }
-        public Vector2 Size { get; set; }
+
         public bool IsLoaded { get; set; }
 
         public LazerGameComponent(string ID)
         {
+            if (ID == null)
+                ID = GetID();
             this.ID = ID;
         }
 
@@ -86,7 +107,12 @@ namespace LazerEngine.Common.Model
 
         public virtual void Draw(SpriteBatch batch)
         {
-            batch.Draw(Texture, TextureDestination, TextureSource, Mask, Rotation, Origin, SpriteEffects.FlipHorizontally, 1);
+            var origin = Origin * Size;
+            batch.Draw(Texture,
+                new Rectangle(TextureDestination.Location, (TextureDestination.Size.ToVector2()).ToPoint()),
+                TextureSource,
+                Color.Lerp(Color, Ambience, AmbientIntensity),
+                Rotation, origin, SpriteFlipSetting, 0);
         }
 
         public static string GetID(char prefix = 'O', IEnumerable<LazerGameComponent> scope = null)

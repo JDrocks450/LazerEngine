@@ -52,8 +52,17 @@ namespace LazerEngine.Common.Provider
                 return (T)value;
             return default;
         }
+
+        /// <summary>
+        /// Gets all the Types of providers currently registered
+        /// </summary>
+        /// <returns></returns>
+        public Type[] GetAll()
+        {
+            return providers.Keys.ToArray();
+        }
        
-        public IProvider Register(IProvider Provider)
+        public T Register<T>(T Provider) where T : IProvider
         {
             providers.Add(Provider.GetType(), Provider);
             Provider.Parent = this;

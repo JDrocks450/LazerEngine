@@ -1,5 +1,4 @@
 ﻿using LazerEngine.Common.Provider;
-using LazerEngine.Content.Provider;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,11 +13,9 @@ namespace LazerEngine.Content
     public class LazerContentManager : ProviderManager
     {
         private ContentManager Manager;
-        private TerrainProvider TerrainProvider;
         public LazerContentManager(ContentManager manager) : base("content")
         {
             Manager = manager;
-            TerrainProvider = (TerrainProvider)Register(new TerrainProvider(this));
         }
 
         public T GetContent<T>(string key)
